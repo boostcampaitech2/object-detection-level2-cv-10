@@ -19,7 +19,6 @@ class EDA:
 
 
 
-
 if __name__ == '__main__':
     print('seaborn version : ', sns.__version__)
 

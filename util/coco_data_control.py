@@ -73,7 +73,7 @@ class COCO_ImageAnnotation:
             train_coco_df = pd.merge(self.__images_df, self.__annotations_df, right_index=True, left_index=True)
             train_coco_df.to_csv(self.__save_path, sep=',', na_rep='NaN')
         else:
-            print("Either the file is missing or not readable")
+            print("Check either the file is missing or not readable")
 
 
 if __name__ == '__main__':
