@@ -12,6 +12,7 @@ class COCO_ImageAnnotation:
     __save_path = None
     __images_df = pd.DataFrame()
     __annotations_df = pd.DataFrame()
+    __train_coco_df = pd.DataFrame()
 
     def __init__(self, save_path=None) -> None:
         self.__save_path = save_path
@@ -64,17 +65,22 @@ class COCO_ImageAnnotation:
     def save_to_csv(self, save_path : str) -> None:
         if(self.__images_df.empty or self.__annotations_df.empty):
             print("Check convert_to_df before call")
-            return None
-        
-        if(save_path != None):
-            self.__save_path = save_path
-        directory, _ = os.path.split(self.__save_path)
-        if os.path.isdir(directory) and os.access(directory, os.R_OK):
-            train_coco_df = pd.merge(self.__images_df, self.__annotations_df, right_index=True, left_index=True)
-            train_coco_df.to_csv(self.__save_path, sep=',', na_rep='NaN')
-        else:
-            print("Check either the file is missing or not readable")
+        else:           
+            if(save_path != None):
+                self.__save_path = save_path
+            directory, _ = os.path.split(self.__save_path)
+            if os.path.isdir(directory) and os.access(directory, os.R_OK):
+                self.__train_coco_df = pd.merge(self.__images_df, self.__annotations_df, right_index=True, left_index=True)
+                self.__train_coco_df.to_csv(self.__save_path, sep=',', na_rep='NaN')
+            else:
+                print("Check either the file is missing or not readable")
 
+    def get_df_or_none(self):
+        if(self.__train_coco_df.empty):
+            print("Check run convert_to_df before use it")
+            return None
+        else:
+            return self.__train_coco_df
 
 if __name__ == '__main__':
     root='../dataset/'
@@ -85,3 +91,5 @@ if __name__ == '__main__':
     coco_img_annotation = COCO_ImageAnnotation(None)
     coco_img_annotation.convert_to_df(train_coco)
     coco_img_annotation.save_to_csv(save_path)
+    train_df = coco_img_annotation.get_df_or_none()
+    print(train_df)
