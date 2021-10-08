@@ -19,7 +19,7 @@ import torch.optim as optim
 # Custom
 from models.torchvision_faster_rcnn import TorchVisionFasterRCNNwFPN
 from datasets import RecycleDetDataset, get_train_transform, get_valid_transform
-from models.utils import GetConfig
+from utils import GetConfig
 
 now = datetime.now()
 cur_time_str = now.strftime("%d%m%Y_%H%M")
@@ -41,9 +41,9 @@ def collate_fn(batch):
 def main():
 
     config_defaults = {
-        'epochs': 5,
-        'batch_size': 16,
-        'learning_rate': 1e-3,
+        'epochs': 50,
+        'batch_size': 32,
+        'learning_rate': 1e-4,
         # 'scheduler_step': 1,
         # 'optimizer': 'sgd',
         # 'optimizer': 'adam',
@@ -60,12 +60,14 @@ def main():
     TRAIN_DATA_PATH = "/opt/ml/Git/object-detection-level2-cv-10/data"
     IMAGE_DATA_PATH = "/opt/ml/detection/dataset"
     TRAIN_JSON = {
-        "train": f"{TRAIN_DATA_PATH}/stratified_train.json",
-        "val": f"{TRAIN_DATA_PATH}/stratified_valid.json",
+        # "train": f"{TRAIN_DATA_PATH}/stratified_train.10fold.json",
+        # "val": f"{TRAIN_DATA_PATH}/stratified_valid.10fold.json",
+        "train": f"{TRAIN_DATA_PATH}/stratified_train.10fold.wArea.json",
+        "val": f"{TRAIN_DATA_PATH}/stratified_valid.10fold.wArea.json",
     }
     TRAIN_CSV = {
-        "train": f"{TRAIN_DATA_PATH}/stratified_train.csv",
-        "val": f"{TRAIN_DATA_PATH}/stratified_valid.csv",
+        "train": f"{TRAIN_DATA_PATH}/stratified_train.10fold.csv",
+        "val": f"{TRAIN_DATA_PATH}/stratified_valid.10fold.csv",
     }
 
     defined_transforms = {
@@ -89,9 +91,9 @@ def main():
         x: DataLoader(
             recycle_dataset[x],
             batch_size=config.batch_size,
-            # shuffle=True,
-            num_workers=4,
-            # pin_memory=True,
+            shuffle=True,
+            num_workers=2,
+            pin_memory=True,
             collate_fn=collate_fn,
             # sampler=sampler[x],
         )
@@ -100,19 +102,20 @@ def main():
     logger.info(f"Dataloader progress. {time.perf_counter() - _time:.4f}s")
 
     _time = time.perf_counter()
-    model = TorchVisionFasterRCNNwFPN(num_classes=NUM_CLASS)
+    model = TorchVisionFasterRCNNwFPN(num_classes=NUM_CLASS, pretrained=True)
     model.to(device)
     logger.info(f"Model progress. {time.perf_counter() - _time:.4f}s")
 
     _time = time.perf_counter()
-    params = (p for p in model.parameters() if p.requires_grad)
+    # params = (p for p in model.parameters() if p.requires_grad)
     logger.info(f"Define grad_params. {time.perf_counter() - _time:.4f}s")
 
-    # optimizer = optim.SGD(model.params(),
-    optimizer = optim.SGD(params,
-                          lr=config.learning_rate,
-                          momentum=0.9,
-                          weight_decay=0.0005)
+    optimizer = optim.SGD(
+        model.parameters(),
+        lr=config.learning_rate,
+        momentum=0.9,
+    )
+    #   weight_decay=0.0005)
 
     # training
     model.train_model(

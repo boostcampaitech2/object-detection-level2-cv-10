@@ -16,7 +16,8 @@ from pycocotools.cocoeval import COCOeval
 
 def get_train_transform():
     return A.Compose(
-        [A.Resize(1024, 1024),
+        # [A.Resize(1024, 1024),
+        [A.Resize(512, 512),
          A.Flip(p=0.5), ToTensorV2(p=1.0)],
         bbox_params={
             'format': 'pascal_voc',
@@ -66,22 +67,38 @@ class RecycleDetDataset(Dataset):
         ann_ids = self.coco.getAnnIds(imgIds=image_info['id'])
         anns = self.coco.loadAnns(ann_ids)
 
-        boxes = np.array([x['bbox'] for x in anns])
+        labels = []
+        areas = []
+        is_crowds = []
+        boxes = []
+
+        for ann in anns:
+            labels.append(ann['category_id'] + 1)
+            areas.append(ann['area'])
+            is_crowds.append(ann['iscrowd'])
+            boxes.append(ann['bbox'])
+
+        # boxes = np.array([x['bbox'] for x in anns])
+        boxes = np.array(boxes)
 
         # boxex (x_min, y_min, x_max, y_max)
         boxes[:, 2] = boxes[:, 0] + boxes[:, 2]
         boxes[:, 3] = boxes[:, 1] + boxes[:, 3]
 
+        labels = torch.as_tensor(labels, dtype=torch.int64)
+        areas = torch.as_tensor(areas, dtype=torch.float32)
+        is_crowds = torch.as_tensor(is_crowds, dtype=torch.int64)
+
         # torchvision faster_rcnn은 label=0을 background로 취급
         # class_id를 1~10으로 수정
-        labels = np.array([x['category_id'] + 1 for x in anns])
-        labels = torch.as_tensor(labels, dtype=torch.int64)
+        # labels = np.array([x['category_id'] + 1 for x in anns])
+        # labels = torch.as_tensor(labels, dtype=torch.int64)
 
-        areas = np.array([x['area'] for x in anns])
-        areas = torch.as_tensor(areas, dtype=torch.float32)
+        # areas = np.array([x['area'] for x in anns])
+        # areas = torch.as_tensor(areas, dtype=torch.float32)
 
-        is_crowds = np.array([x['iscrowd'] for x in anns])
-        is_crowds = torch.as_tensor(is_crowds, dtype=torch.int64)
+        # is_crowds = np.array([x['iscrowd'] for x in anns])
+        # is_crowds = torch.as_tensor(is_crowds, dtype=torch.int64)
 
         target = {
             'boxes': boxes,

@@ -4,6 +4,8 @@ import logging
 import time
 from functools import partial
 
+import pdb
+
 # 3rd
 from tqdm import tqdm
 
@@ -16,6 +18,7 @@ from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 # Custom
 # from utils import MetricDict
+from utils.draw import DrawBBox
 from references.utils import MetricLogger, SmoothedValue
 from references.coco_eval import CocoEvaluator
 # from references.coco_utils import get_coco_api_from_dataset
@@ -24,7 +27,7 @@ logger = logging.getLogger('model')
 
 
 class TorchVisionFasterRCNNwFPN(nn.Module):
-    def __init__(self, num_classes=10):
+    def __init__(self, num_classes=10, pretrained=True):
         super(TorchVisionFasterRCNNwFPN, self).__init__()
         _time = time.perf_counter()
         self.backbone = None
@@ -32,7 +35,7 @@ class TorchVisionFasterRCNNwFPN(nn.Module):
 
         _time = time.perf_counter()
         self.head = torchvision.models.detection.fasterrcnn_resnet50_fpn(
-            pretrained=True)
+            pretrained=pretrained)
         # self.head._has_warned = True
         logger.info(f"Load head. {time.perf_counter() - _time:.4f}s")
 
@@ -93,13 +96,13 @@ class TorchVisionFasterRCNNwFPN(nn.Module):
         metric_val_logger = MetricLogger(delimiter="  ")
 
         coco = dataloaders['val'].dataset.coco
+        draw_bbox = DrawBBox(coco)
         # iou_types = _get_iou_types(model)
         iou_types = ['bbox']
-        coco_evaluator = CocoEvaluator(coco, iou_types)
-
         for epoch in range(num_epochs):
             logger.info(f"Epoch {epoch + 1:>2}/{num_epochs} ----------")
-            coco_evaluator.eval_imgs = {k: [] for k in iou_types}
+            coco_evaluator = CocoEvaluator(coco, iou_types)
+            # coco_evaluator.eval_imgs = {k: [] for k in iou_types}
             # print(f"Epoch {epoch + 1:>2}/{num_epochs} ----------")
             # metric_dict.reset()
             for phase in train_process:
@@ -134,7 +137,14 @@ class TorchVisionFasterRCNNwFPN(nn.Module):
                         outputs = detections
                         outputs = [{k: v.to(cpu_device)
                                     for k, v in t.items()} for t in outputs]
-
+                        # draw_time = time.perf_counter()
+                        if epoch > 0 and epoch % 5 == 0:
+                            draw_bbox.batch_draw(epoch=epoch,
+                                                image_ids=image_ids,
+                                                outputs=outputs)
+                        # logger.info(
+                        #     f"draw time: {time.perf_counter() - draw_time:.4f}s"
+                        # )  # avg.: 70s
                         res = {
                             target["image_id"].item(): output
                             for target, output in zip(targets, outputs)
@@ -147,12 +157,15 @@ class TorchVisionFasterRCNNwFPN(nn.Module):
 
                 # print(f"Epoch #{epoch+1} {phase} loss: {loss_hist.value}")
                 # gather the stats from all processes
+                if phase == 'train':
+                    metric_train_logger.synchronize_between_processes()
+                    print(metric_train_logger)
                 if phase == 'val':
                     metric_val_logger.synchronize_between_processes()
                     print("Averaged stats:", metric_val_logger)
-                    coco_evaluator.synchronize_between_processes()
 
                     # accumulate predictions from all images
+                    coco_evaluator.synchronize_between_processes()
                     coco_evaluator.accumulate()
                     coco_evaluator.summarize()
 
