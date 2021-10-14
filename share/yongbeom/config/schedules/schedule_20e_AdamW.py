@@ -3,10 +3,11 @@
 # AdamW
 optimizer = dict(
     type='AdamW',
-    # lr=0.0001,
+    lr=0.0001,
     # lr=0.00005,
     # lr=0.00001,
-    lr=0.000005,
+    # lr=0.000005,
+    # lr=0.000001,
     betas=(0.9, 0.999),
     weight_decay=0.05,
     paramwise_cfg=dict(
@@ -17,13 +18,9 @@ optimizer = dict(
         }))
 
 # learning policy
-lr_config = dict(
-    policy='step',
-    #  warmup='linear',
-    #  warmup_iters=2000,
-    #  warmup_ratio=0.001,
-    step=[16, 19])
+lr_config = dict(policy='step', step=[11, 19])
+# step=[16, 19])
 
 optimizer_config = dict(grad_clip=None)
 
-runner = dict(type='EpochBasedRunner', max_epochs=20)
+runner = dict(type='EpochBasedRunner', max_epochs=24)

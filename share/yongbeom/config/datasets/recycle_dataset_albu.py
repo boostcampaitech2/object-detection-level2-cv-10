@@ -20,20 +20,6 @@ albu_train_transforms = [
          brightness_limit=[0.1, 0.3],
          contrast_limit=[0.1, 0.3],
          p=0.2),
-    # dict(type='OneOf',
-    #      transforms=[
-    #          dict(type='RGBShift',
-    #               r_shift_limit=10,
-    #               g_shift_limit=10,
-    #               b_shift_limit=10,
-    #               p=1.0),
-    #          dict(type='HueSaturationValue',
-    #               hue_shift_limit=20,
-    #               sat_shift_limit=30,
-    #               val_shift_limit=20,
-    #               p=1.0)
-    #      ],
-    #      p=0.1),
     dict(type='ImageCompression', quality_lower=85, quality_upper=95, p=0.2),
     dict(type='OneOf',
          transforms=[
@@ -49,7 +35,6 @@ train_pipeline = [
     dict(
         type='Resize',
         # img_scale=[(640, 640), (704, 704), (768, 768), (832, 832), (896, 896), (960, 960), (1024, 1024)],
-        # img_scale=[(704, 704), (768, 768), (896, 896), (1024, 1024)],
         img_scale=[(1024, 768), (768, 1024), (896, 1024), (1024, 1024)],
         # img_scale=[(1024, 1024)],
         multiscale_mode="value",
@@ -106,14 +91,14 @@ test_pipeline = [
 ]
 
 data = dict(
-    samples_per_gpu=8,
+    samples_per_gpu=12,
     workers_per_gpu=4,
     train=dict(
         type=dataset_type,
         classes=classes,
-        # ann_file=
-        # "/opt/ml/Git/object-detection-level2-cv-10/data/stratified_train.10fold.wArea.json",
-        ann_file=data_root + 'train.json',
+        ann_file=
+        "/opt/ml/Git/object-detection-level2-cv-10/data/stratified_train.10fold.wArea.json",
+        # ann_file=data_root + 'train.json',
         # img_prefix=data_root + 'train/',
         img_prefix=data_root,
         pipeline=train_pipeline),
@@ -130,8 +115,8 @@ data = dict(
         classes=classes,
         ann_file=data_root + 'test.json',
         #   img_prefix=data_root + 'test/',
-        # test_mode=True,
+        test_mode=True,
         img_prefix=data_root,
-        pipeline=test_pipeline))
+        pipeline=val_pipeline))
 
 evaluation = dict(interval=1, metric='bbox', classwise=True)

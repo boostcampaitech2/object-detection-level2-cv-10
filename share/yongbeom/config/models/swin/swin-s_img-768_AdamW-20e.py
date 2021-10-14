@@ -1,22 +1,18 @@
 _base_ = [
-    '../htc/htc_without_mask_r50_fpn_1x_coco.py',
-    # '../htc/htc_without_mask_r50_fpn_1x_coco_focal.py',
+    '../htc/htc_soft-nms_without_mask_r50_fpn_1x_coco.py',
     '../../datasets/recycle_dataset_albu.py',
-    # '../../schedules/schedule_3x_AdamW.py',
-    '../../schedules/schedule_1x_AdamW.py',
+    '../../schedules/schedule_20e_AdamW.py',
     '../../default_runtime.py',
 ]
 
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'  # noqa TINY
-# pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_small_patch4_window7_224.pth'  # noqa SMALL
 
 model = dict(
     backbone=dict(
         _delete_=True,
         type='SwinTransformer',
         embed_dims=96,
-        # depths=[2, 2, 18, 2],  # Small
-        depths=[2, 2, 6, 2],  # Tiny
+        depths=[2, 2, 18, 2],  # Small
         num_heads=[3, 6, 12, 24],
         window_size=7,
         mlp_ratio=4,

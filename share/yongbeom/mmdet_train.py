@@ -176,7 +176,7 @@ def main():
     if args.checkpoint_file:
         model.load_state_dict(torch.load(args.checkpoint_file)['state_dict'])
 
-    model.backbone.stage4.apply(initialize_parameters)
+    # model.backbone.stage4.apply(initialize_parameters)
 
     datasets = [build_dataset(cfg.data.train)]
 
