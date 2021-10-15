@@ -7,7 +7,7 @@ object-detection-level2-cv-10 created by GitHub Classroom
 ### yolov5
 
 ## Ensemble 방법
-###command를 실행하여
+### command를 실행하여
 ```python
 python abc.py
 ```
