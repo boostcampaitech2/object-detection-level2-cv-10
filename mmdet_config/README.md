@@ -65,6 +65,7 @@ mmdet_config
     ```python
     python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e.py
     ```
+### hrnet
 - hrnet
   - commend
     ```python
