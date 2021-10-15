@@ -28,7 +28,11 @@ labels(폴더)
   train(폴더-train label 파일들)
   val(폴더-validation label 파일들)
 
+
+
+
 ### yolov5
+#### Git clone https://github.com/open-mmlab/mmdetection.git
 #### 실행 방법
 실행시 에러가 발생하는 부분은 파일 경로에 맞게 수정해야 합니다.
 1. path와 class 정보를 갖고 있는 trash_10.yaml 파일을 복사
