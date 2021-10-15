@@ -1,4 +1,6 @@
-'''
+
+```
+mmdet_config
 │  default_runtime.py
 │
 ├─datasets
@@ -26,4 +28,45 @@
         schedule_20e_AdamW.py
         schedule_2x.py
         schedule_3x_AdamW.py
-'''
+```
+# mmdetection
+
+## cascade r-cnn
+
+- pseudo labeling
+  - 필요한 것
+    - pseudo labeling.py를 통해 얻은 이미지 폴더
+    - 만들어진 이미지와 matching되는 pseudo labeling된 json file
+    - mmdet/apis/train.py 142 line
+    ```python
+    #수정 전
+        val_dataloader = build_dataloader(
+        val_dataset,
+        samples_per_gpu=val_samples_per_gpu,
+        workers_per_gpu=cfg.data.workers_per_gpu,
+        dist=distributed,
+        shuffle=False)
+    ```
+    ```python
+    #수정 후
+        val_dataloader = build_dataloader(
+        val_dataset,
+        samples_per_gpu= 1,
+        workers_per_gpu=cfg.data.workers_per_gpu,
+        dist=distributed,
+        shuffle=False)
+    ```
+  - commend
+    ```python
+    python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e_pseudo_labeling.py
+    ```
+- normal
+  - commend
+    ```python
+    python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e.py
+    ```
+- hrnet
+  - commend
+    ```python
+    python mmdet_train.py -c mmdet_config/models/swin/swin-s_fpn_htc_soft-nms_AdamW-2x.py
+    ```
