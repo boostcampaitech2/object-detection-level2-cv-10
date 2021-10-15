@@ -1,6 +1,7 @@
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = "/opt/ml/detection/dataset/"
+data_root = "/home/b0n/Data/dataset/"
+# data_root = "/opt/ml/detection/dataset/"
 
 classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass", "Plastic",
            "Styrofoam", "Plastic bag", "Battery", "Clothing")
