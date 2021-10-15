@@ -1,9 +1,8 @@
 # yolov5 사용법
 
 ## COCO data format -> yolov5 data format으로 변경
-### Convert2Yolo
-#### Git clone https://github.com/ssaru/convert2Yolo
-#### 실행 방법
+### Git clone https://github.com/ssaru/convert2Yolo
+### 실행 방법
 실행시 에러가 발생하는 부분은 파일 경로에 맞게 수정해야 합니다.
 1. root folder인 convert2Yolo에 train folder 생성
 2. class 종류를 정의하는 names.txt를 복사
@@ -30,10 +29,9 @@ labels(폴더)
 
 
 
-
-### yolov5
-#### Git clone https://github.com/open-mmlab/mmdetection.git
-#### 실행 방법
+## yolov5 data를 이용한 train/val/test 방법
+### Git clone https://github.com/open-mmlab/mmdetection.git
+### 실행 방법
 실행시 에러가 발생하는 부분은 파일 경로에 맞게 수정해야 합니다.
 1. path와 class 정보를 갖고 있는 trash_10.yaml 파일을 복사
 2. augmentation 정보를 갖고 있는 hyp.finetune_custom.yaml 파일을 복사
