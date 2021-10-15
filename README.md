@@ -1,5 +1,10 @@
-# object-detection-level2-cv-10
-object-detection-level2-cv-10 created by GitHub Classroom
+<h1 align="center">
+<p>object-detection-level2-cv-10
+</h1>
+
+<h3 align="center">
+<p>권예환_T2012, 권용범_T2013, 김경민_T2018, 방누리_T2098, 심재빈_T2124, 정현종_T2208
+</h3>
 
 ## model 사용법(REAME.MD 파일 참조)
 ### mmdetection-

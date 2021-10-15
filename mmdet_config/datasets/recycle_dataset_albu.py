@@ -1,6 +1,7 @@
 # dataset settings
 dataset_type = 'CocoDataset'
 data_root = "/home/b0n/Data/dataset/"
+git_path = '/home/b0n/Git/object-detection-level2-cv-10/'
 # data_root = "/opt/ml/detection/dataset/"
 
 classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass", "Plastic",
@@ -97,8 +98,7 @@ data = dict(
     train=dict(
         type=dataset_type,
         classes=classes,
-        ann_file=
-        "/opt/ml/Git/object-detection-level2-cv-10/data/stratified_train.10fold.wArea.json",
+        ann_file=git_path + "data/stratified_train.10fold.wArea.json",
         # ann_file=data_root + 'train.json',
         # img_prefix=data_root + 'train/',
         img_prefix=data_root,
@@ -106,15 +106,15 @@ data = dict(
     val=dict(
         type=dataset_type,
         classes=classes,
-        ann_file=
-        "/opt/ml/Git/object-detection-level2-cv-10/data/stratified_valid.10fold.wArea.json",
+        ann_file=git_path + "data/stratified_valid.10fold.wArea.json",
         # img_prefix=data_root + 'train/',
         img_prefix=data_root,
         pipeline=val_pipeline),
     test=dict(
         type=dataset_type,
         classes=classes,
-        ann_file=data_root + 'test.json',
+        ann_file=git_path + "data/stratified_valid.10fold.wArea.json",
+        # ann_file=data_root + 'test.json',
         #   img_prefix=data_root + 'test/',
         test_mode=True,
         img_prefix=data_root,

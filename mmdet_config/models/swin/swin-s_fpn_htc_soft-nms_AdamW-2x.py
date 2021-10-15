@@ -5,7 +5,7 @@ _base_ = [
     '../../default_runtime.py',
 ]
 
-pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'  # noqa TINY
+# pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'  # noqa TINY
 
 model = dict(
     backbone=dict(
@@ -25,16 +25,16 @@ model = dict(
         out_indices=(0, 1, 2, 3),
         with_cp=False,
         convert_weights=True,
-        init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
+        # init_cfg=dict(type='Pretrained', checkpoint=pretrained)
+    ),
     neck=dict(in_channels=[96, 192, 384, 768]))
 
-log_config = dict(
-    interval=50,
-    hooks=[
-        dict(type='TextLoggerHook'),
-        dict(type='WandbLoggerHook',
-             init_kwargs=dict(project='mmdet-htc-swin',)),
-    ])
+log_config = dict(interval=50,
+                  hooks=[
+                      dict(type='TextLoggerHook'),
+                      dict(type='WandbLoggerHook',
+                           init_kwargs=dict(project='mmdet-htc-swin', )),
+                  ])
 
 fp16 = dict(loss_scale=dict(init_scale=512))
 
