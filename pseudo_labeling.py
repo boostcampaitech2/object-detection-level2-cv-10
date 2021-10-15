@@ -45,7 +45,7 @@ def make_imagedf(name, data):
     return data
     
 def make_1annodf(name,
-                 anno_list,
+                 data,
                  category_id, 
                  i, 
                  j,
@@ -57,10 +57,10 @@ def make_1annodf(name,
     data['annotations'][-1]['bbox'] = [512-int(j/2), 512-int(i/2), j, i]
     data['annotations'][-1]['iscrowd'] = 0
     data['annotations'][-1]['id'] = id
-    return anno_list
+    return data
 
 def make_4annodf(name,
-                 anno_list,
+                 data,
                  category_id,
                  i,
                  j,
@@ -75,7 +75,7 @@ def make_4annodf(name,
     data['annotations'][-1]['bbox'] = [512 * jx[idx] + (256-int(j/2)), 512 * ix[idx] + (256-int(i/2)), j, i]
     data['annotations'][-1]['iscrowd'] = 0
     data['annotations'][-1]['id'] = id
-    return anno_list
+    return data
 
 def make_1object(img_inform, data, cnt):
     save_img = np.full((1024,1024,3), 255)
