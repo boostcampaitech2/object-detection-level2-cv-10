@@ -48,7 +48,7 @@ python detect.py
 ```
 8. command를 실행하여 inference 결과를 submission 형식으로 변환
 ```python
-submission_converter.py
+python submission_converter.py
 ```
 
 
