@@ -18,14 +18,14 @@ python3 example.py --datasets COCO --img_path /opt/ml/detection/dataset/train --
 python3 copy_manifest_image_path_to_dir.py
 ```
 6. train 실행전에 images와 labels 폴더에 각각 test/train/val 폴더/파일이 존재하는지 확인
-images(폴더)
-  test(폴더-test image 파일들)
-  train(폴더-train image 파일들)
-  val(폴더-validation image 파일들)
-labels(폴더)
-  test(폴더-필요 없음)
-  train(폴더-train label 파일들)
-  val(폴더-validation label 파일들)
+* images(폴더)
+  * test(폴더-test image 파일들)
+  * train(폴더-train image 파일들)
+  * val(폴더-validation image 파일들)
+* labels(폴더)
+  * test(폴더-필요 없음)
+  * train(폴더-train label 파일들)
+  * val(폴더-validation label 파일들)
 
 
 
