@@ -1,8 +1,6 @@
 # Data
 
-## Stratified 5-Fold
-
-<img src="/images/train_valid_distribution.png">
+## Stratified 10-Fold
 
 ### csv format
 
