@@ -27,3 +27,15 @@ model = dict(
         convert_weights=True,
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
     neck=dict(in_channels=[96, 192, 384, 768]))
+
+log_config = dict(
+    interval=50,
+    hooks=[
+        dict(type='TextLoggerHook'),
+        dict(type='WandbLoggerHook',
+             init_kwargs=dict(project='mmdet-htc-swin',)),
+    ])
+
+fp16 = dict(loss_scale=dict(init_scale=512))
+
+seed = 123456
