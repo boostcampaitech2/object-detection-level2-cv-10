@@ -85,7 +85,7 @@ def make_1object(img_inform, data, cnt):
         for j2 in range(j):
             save_img[512-int(i/2) + i2][512-int(j/2) + j2] = img[i2][j2]
     #plt.imshow(save_img)
-    cv2.imwrite(f'../dataset/train_plus/{cnt_image}.jpg', save_img)
+    cv2.imwrite(f'/opt/ml/detection/dataset/train_plus/{cnt_image}.jpg', save_img)
     data = make_imagedf(cnt_image, data)
     data = make_1annodf(cnt_image,
                         data,
@@ -106,7 +106,7 @@ def make_4object(img_q, data, cnt):
             for j2 in range(j):
                 save_img[512 * ix[idx] + (256-int(i/2) + i2)][512 * jx[idx] + (256-int(j/2) + j2)] = img[i2][j2]
         #plt.imshow(save_img)
-        cv2.imwrite(f'../dataset/train_plus/{cnt_image}.jpg', save_img)
+        cv2.imwrite(f'/opt/ml/detection/dataset/train_plus/{cnt_image}.jpg', save_img)
         data = make_4annodf(cnt_image,
                         data,
                         current_categories, 
@@ -142,7 +142,8 @@ if __name__ == '__main__':
     annotations_list = OrderedDict()
     cnt = 0
     for idx in categories.keys():
-        path = './yolov5/runs/detect/exp10/crops/' + idx + '/'
+        crop_image_path = './yolov5/runs/detect/exp10/crops/'
+        path = crop_image_path + idx + '/'
         file_list = os.listdir(path)
         print(len(file_list))
         for title in file_list:
@@ -176,5 +177,5 @@ if __name__ == '__main__':
         if cnt_image % 100 == 0:
             print(cnt_image)
 
-    with open('../dataset/labeling_data.json', 'w', encoding = 'utf-8') as make_file:
+    with open('/opt/ml/detection/dataset/labeling_data.json', 'w', encoding = 'utf-8') as make_file:
         json.dump(data, make_file, ensure_ascii = False, indent = "\t")

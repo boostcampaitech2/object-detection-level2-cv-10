@@ -52,3 +52,14 @@ python submission_converter.py
 ```
 
 
+## pseudo labeling을 위한 train/val/test 방법
+yolov5 data를 이용한 train/val/test 방법의 .yaml file을 사용합니다.
+1. command를 실행하여 train
+```python
+ python train.py --batch 8 --epochs 50 --data ./data/trash_10.yaml --weights yolov5x.pt --img 1024 --patience 5
+```
+2. command를 실행하여 inference
+```python
+python detect.py --weights ./opt/ml/detection/yolov5/runs/train/{1의 결과로 나온 exp folder}/weights/best.pt --img 1024  --source '/opt/ml/detection/dataset/yolov5_dataset/images/test' --save-txt --conf-thres 0.8 --iou-thres 0.8 --save-conf --save-crop
+```
+3. runs/detect/ 내의 exp 폴더를 확인한 후, exp 폴더 내의 crop된 이미지를 확인합니다. 
