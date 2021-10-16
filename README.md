@@ -7,9 +7,9 @@
 </h3>
 
 ## model 사용법(REAME.MD 파일 참조)
-### mmdetection-
-### mmdetection-
-### yolov5
+### mmdetection-config
+### mmdetection-model
+### yolov5 폴더 - yolov5 설정 및 사용법
 
 ## Ensemble 방법
 ### command를 실행하여
