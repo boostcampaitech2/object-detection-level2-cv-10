@@ -19,9 +19,9 @@
 
 ### 시연결과
 <p float="left">
-  <img src="/images/0000.png" width="250" />
-  <img src="/images/0002.png" width="250" />
-  <img src="/images/0008.png" width="250" />
+  <img src="/images/0000.jpg" width="250" />
+  <img src="/images/0002.jpg" width="250" />
+  <img src="/images/0008.jpg" width="250" />
 </p>
 
 
