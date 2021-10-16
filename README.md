@@ -10,9 +10,3 @@
 ### mmdetection-config
 ### mmdetection-model
 ### yolov5 폴더 - yolov5 설정 및 사용법
-
-## Ensemble 방법
-### command를 실행하여
-```python
-python abc.py
-```
