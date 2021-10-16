@@ -25,8 +25,15 @@
 </p>
 
 
-## model 사용법(REAME.MD 파일 참조)
-### mmdetection-config
-### mmdetection-model
-### yolov5 폴더 - yolov5 설정 및 사용법
-## Ensemble - utils 폴더
+## Model infomation
+
+1. [YOLOv5](/yolov5/README.MD)
+
+2. [swin-t_Cascade_R-CNN](/mmdet_config/README.md)
+
+2. [swin-t_HTC_R-CNN](/mmdet_config/README.md)
+
+## Ensemble
+```
+python ensemble_inference.py ~
+```
