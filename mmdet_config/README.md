@@ -30,14 +30,7 @@ mmdet_config
         schedule_3x_AdamW.py
 ```
 # mmdetection
-
-## cascade r-cnn
-
-- pseudo labeling
-  - 필요한 것
-    - pseudo labeling.py를 통해 얻은 이미지 폴더
-    - 만들어진 이미지와 matching되는 pseudo labeling된 json file
-    - mmdet/apis/train.py 142 line
+  - mmdet/apis/train.py 142 line
     ```python
     #수정 전
         val_dataloader = build_dataloader(
@@ -56,6 +49,12 @@ mmdet_config
         dist=distributed,
         shuffle=False)
     ```
+## cascade r-cnn
+
+- pseudo labeling
+  - 필요한 것
+    - pseudo labeling.py를 통해 얻은 이미지 폴더
+    - 만들어진 이미지와 matching되는 pseudo labeling된 json file
   - commend
     ```python
     python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e_pseudo_labeling.py
