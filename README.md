@@ -36,9 +36,35 @@ loss:
 ```
 
 ### [Swin-t FPN Cascade R-CNN](/mmdet_config/)
-
-### [Swin-t FPN Cascade R-CNN psuedo labeling](/mmdet_config/)
-
+```
+optimizer: AdamW (lr = 1 X 1e-4)
+scheduler: StepLR (gamma = 0.1, 16 epoch, 22 epoch)
+epoch: 24
+loss
+    classification : CrossEntropy
+    bounding box regression : Smooth L1
+```
+### [Swin-t FPN Cascade R-CNN Pseudo labeling](/mmdet_config/)
+```
+Pseudo labeling (label data Learning)
+model = yolov5x
+optimizer: SGD (lr = 0.001)
+scheduler: OnecycleLR
+epoch: 44/50(early stop)
+loss : default
+```
+```
+Pseudo labeling (Semi-Supervised Learning)
+model
+    backbone : swin-t
+    head : Cascade R-CNN
+optimizer: AdamW (lr = 1 X 1e-4)
+scheduler: StepLR (gamma = 0.1, 16 epoch, 22 epoch)
+epoch: 23
+loss
+    classification : CrossEntropy
+    bounding box regression : Smooth L1
+```
 ### [Swin-s FPN HTC](/mmdet_config/)
 ## Ensemble
 ```
