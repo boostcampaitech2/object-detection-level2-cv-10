@@ -51,7 +51,7 @@ model = yolov5x
 optimizer: SGD (lr = 0.001)
 scheduler: OnecycleLR
 epoch: 44/50(early stop)
-loss : default
+loss : Yolov5 default loss
 ```
 ```
 Pseudo labeling (Semi-Supervised Learning)
