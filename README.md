@@ -40,13 +40,16 @@ loss:
 ### [Swin-t FPN Cascade R-CNN psuedo labeling](/mmdet_config/)
 
 ### [Swin-s FPN HTC](/mmdet_config/)
+```bash
+# model train
+python mmdet_train.py -c mmdet_config/models/swin/swin-s_fpn_htc_soft-nms_AdamW-2x.py
 ```
 optimizer: AdamW
 lr: 0.0001 (initial)
 scheduler: StepLR
 epoch: 30
 loss: HTC default loss
-```
+
 ## Ensemble
 ```
 python ensemble_inference.py ensemble_inference_cfg.json

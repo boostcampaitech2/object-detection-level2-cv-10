@@ -256,13 +256,14 @@ def main(imgs_path: list or str = None, json_path: str = None):
 
     dfs = []
 
-    work_dir = '../p_stage_obj_det/mmdet/config/work_dirs/test'
+    work_dir = 'work_dirs/swin-s_fpn_htc_soft-nms_AdamW-2x'
     config_file = 'mmdet_config/models/swin/swin-s_fpn_htc_soft-nms_AdamW-2x.py'
-    checkpoint_file = '4th-model_epoch_4.pth'
+    checkpoint_file = 'latest.pth'
 
     df = infer_module(work_dir=work_dir,
                       config_file=config_file,
                       checkpoint_file=checkpoint_file)
+
     dfs.append(df)
 
     bboxes, scores, labels = nmw_ensemble(dfs=dfs, weights=[1])
