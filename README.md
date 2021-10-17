@@ -47,7 +47,8 @@ loss
 ```
 ### [Swin-t FPN Cascade R-CNN Pseudo labeling](/mmdet_config/)
 ```
-Pseudo labeling (label data Learning)
+[pseudo labeling](/utils/)
+Pseudo labeling (Supervised Learning)
 model = yolov5x
 optimizer: SGD (lr = 0.001)
 scheduler: OnecycleLR
