@@ -30,9 +30,9 @@
 ### [YOLOv5](/yolov5/)
 ```
 optimizer: AdamW
-scheduler:
-epoch:
-loss:
+scheduler: one_cycle
+epoch: 200
+loss: Yolov5 default loss
 ```
 
 ### [Swin-t FPN Cascade R-CNN](/mmdet_config/)
