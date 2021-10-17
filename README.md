@@ -7,6 +7,7 @@
 </h3>
 
 ## Overview
+자원의 대부분을 수입하는 우리나라는 특히 자원 재활용이 중요합니다. 국내에서 버려지는 쓰레기종량제 봉투 속을 살펴보면 70%는 재활용이 가능한 자원입니다. 분리수거에 대한 접근성 향상을 위해 딥러닝 모델을 이용해 분리수거를 돕고자 합니다.
 
 ## Usage
 해당 이미지에 포함된 객체들이 어떤 쓰레기인지 파악해주는 명령어입니다. 사용 방법은 아래와 같습니다.
@@ -58,6 +59,7 @@ loss : Yolov5 default loss
 Pseudo labeling (Semi-Supervised Learning)
 model
     backbone : swin-t
+    neck : FPN
     head : Cascade R-CNN
 optimizer: AdamW (lr = 1e-4)
 scheduler: StepLR (gamma = 0.1, 16 epoch, 22 epoch)
@@ -70,6 +72,7 @@ loss
 ```
 model
     backbone : swin-s
+    neck : FPN
     head : HTC
 optimizer: AdamW (lr = 1e-4)
 scheduler: StepLR (gamma = 0.1, 12 epoch, 22 epoch, 28 epoch)
