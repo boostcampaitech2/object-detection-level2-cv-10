@@ -71,6 +71,7 @@ backbone 모델로 모두 swin transformer를 기반으로 하여 학습을 진�
     python mmdet_train.py -c mmdet_config/models/swin/swin-t_fpn_cascade_rcnn_AdamW-24e.py
     ```
 ### HTC
-    ```bash
-    python mmdet_train.py -c mmdet_config/models/swin/swin-s_fpn_htc_soft-nms_AdamW-2x.py
-    ```
+
+  ```bash
+  python mmdet_train.py -c mmdet_config/models/swin/swin-s_fpn_htc_soft-nms_AdamW-2x.py
+  ```
