@@ -1,4 +1,5 @@
 # utils
+## Ensemble
 ### ensemble_config1.json
 - public LB : 0.627
 - 사용 모델
@@ -19,7 +20,7 @@
 - ensemble
   - non-maximum weighted(nmw)
 ### ensemble_inference.py
-### pseudo labeling
+## Pseudo labeling
 **yolov5에서 "pseudo labeling을 위한 train/val/test 방법"으로 crop된 이미지를 사용합니다.**
 1. pseudo_labeling.py의 line 145를 crop된 이미지들이 모인 폴더로 지정합니다.
 2. '/opt/ml/detection/dataset/'에 train_plus폴더를 생성합니다.
