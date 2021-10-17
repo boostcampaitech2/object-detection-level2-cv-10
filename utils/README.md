@@ -20,6 +20,11 @@
 - ensemble
   - non-maximum weighted(nmw)
 ### ensemble_inference.py
+
+```bash
+python ensemble_inference.py ensemble_config1.json
+```
+
 ## Pseudo labeling
 **yolov5에서 "pseudo labeling을 위한 train/val/test 방법"으로 crop된 이미지를 사용합니다.**
 1. pseudo_labeling.py의 line 145를 crop된 이미지들이 모인 폴더로 지정합니다.
