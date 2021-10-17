@@ -16,8 +16,8 @@ mmdet_config
 │  │  └─htc_soft-nms_without_mask_r50_fpn_1x_coco.py
 │  └─swin
 │     ├─swin-s_fpn_htc_soft-nms_AdamW-2x.py
-│     ├─swin-t_img-768_AdamW-24e.py
-│     └─swin-t_img-768_AdamW-24e_pseudo_labeling.py
+│     ├─swin-t_fpn_cascade_rcnn_AdamW-24e.py
+│     └─swin-t_fpn_cascade_rcnn_pseudo_labeling.py
 └─schedules
    ├─schedule_1x.py
    ├─schedule_1x_AdamW.py
@@ -40,7 +40,7 @@ mmdet_config
     shuffle=False)
   ```
 
-# Model
+## Model
 MMDetection에서는 3개 모델을 이용하여 학습을 진행하였습니다.
 
 1. swin-t_img-768_AdamW-24e.py
@@ -61,14 +61,16 @@ backbone 모델로 모두 swin transformer를 기반으로 하여 학습을 진�
     - pseudo_labeling.py를 통해 얻은 이미지 폴더
     - 만들어진 이미지와 matching되는 pseudo labeling된 json file
     실행 방법
-    ```python
+    ```bash
     python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e_pseudo_labeling.py
     ```
 2. normal
 
     실행 방법
-    ```python
+    ```bash
     python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e.py
     ```
 ### HTC
-
+    ```bash
+    python mmdet_train.py -c mmdet_config/models/swin/swin-s_fpn_htc_soft-nms_AdamW-2x.py
+    ```
