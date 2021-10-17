@@ -53,12 +53,13 @@ scheduler: OnecycleLR
 epoch: 44/50(early stop)
 loss : Yolov5 default loss
 ```
+
 ```
 Pseudo labeling (Semi-Supervised Learning)
 model
     backbone : swin-t
     head : Cascade R-CNN
-optimizer: AdamW (lr = 1 X 1e-4)
+optimizer: AdamW (lr = 1e-4)
 scheduler: StepLR (gamma = 0.1, 16 epoch, 22 epoch)
 epoch: 23
 loss
@@ -66,15 +67,15 @@ loss
     bounding box regression : Smooth L1
 ```
 ### [Swin-s FPN HTC](/mmdet_config/)
-```bash
-# model train
-python mmdet_train.py -c mmdet_config/models/swin/swin-s_fpn_htc_soft-nms_AdamW-2x.py
 ```
-optimizer: AdamW
-lr: 0.0001 (initial)
-scheduler: StepLR
+model
+    backbone : swin-s
+    head : HTC
+optimizer: AdamW (lr = 1e-4)
+scheduler: StepLR (gamma = 0.1, 12 epoch, 22 epoch, 28 epoch)
 epoch: 30
 loss: HTC default loss
+```
 
 ## Ensemble
 ```
