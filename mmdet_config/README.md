@@ -62,13 +62,13 @@ backbone 모델로 모두 swin transformer를 기반으로 하여 학습을 진�
     - 만들어진 이미지와 matching되는 pseudo labeling된 json file
     실행 방법
     ```bash
-    python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e_pseudo_labeling.py
+    python mmdet_train.py -c mmdet_config/models/swin/swin-t_fpn_cascade_rcnn_pseudo_labeling.py
     ```
 2. normal
 
     실행 방법
     ```bash
-    python mmdet_train.py -c mmdet_config/models/swin/swin-t_img-768_AdamW-24e.py
+    python mmdet_train.py -c mmdet_config/models/swin/swin-t_fpn_cascade_rcnn_AdamW-24e.py
     ```
 ### HTC
     ```bash
