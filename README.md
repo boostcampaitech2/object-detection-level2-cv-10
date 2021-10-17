@@ -30,9 +30,9 @@
 ### [YOLOv5](/yolov5/)
 ```
 optimizer: AdamW
-scheduler:
-epoch:
-loss:
+scheduler: one_cycle
+epoch: 200
+loss: Yolov5 default loss
 ```
 
 ### [Swin-t FPN Cascade R-CNN](/mmdet_config/)
@@ -66,7 +66,14 @@ loss
     bounding box regression : Smooth L1
 ```
 ### [Swin-s FPN HTC](/mmdet_config/)
+```
+optimizer: AdamW
+lr: 0.0001 (initial)
+scheduler: StepLR
+epoch: 30
+loss: HTC default loss
+```
 ## Ensemble
 ```
-python ensemble_inference.py ~
+python ensemble_inference.py ensemble_inference_cfg.json
 ```
