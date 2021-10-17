@@ -1,3 +1,24 @@
+# utils
+### ensemble_config1.json
+- public LB : 0.627
+- 사용 모델
+  - yolov5x6
+  - Hybrid task cascade(backbone = Swin-S) 
+  - cascade R-CNN (backbone = Swin-T)
+  - Semi-Supervised Learning
+    - Supervised Learning(yolov5x)
+    - Semi-Supervised Learning(cascade R-CNN, backbone = Swin-T)
+- ensemble
+  - non-maximum weighted(nmw)
+### ensemble_config2.json
+- public LB : 0.625
+- 사용 모델
+  - yolov5x6
+  - Hybrid task cascade(backbone = Swin-S) 
+  - cascade R-CNN (backbone = Swin-T)
+- ensemble
+  - non-maximum weighted(nmw)
+### ensemble_inference.py
 ### pseudo labeling
 **yolov5에서 "pseudo labeling을 위한 train/val/test 방법"으로 crop된 이미지를 사용합니다.**
 1. pseudo_labeling.py의 line 145를 crop된 이미지들이 모인 폴더로 지정합니다.
