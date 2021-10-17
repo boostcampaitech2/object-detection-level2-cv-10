@@ -27,47 +27,7 @@ dummy_coco_json = {
     'info': [],
     'licenses': [],
     'images': [],
-    'categories': [{
-        'id': 0,
-        'name': 'General trash',
-        'supercategory': 'General trash'
-    }, {
-        'id': 1,
-        'name': 'Paper',
-        'supercategory': 'Paper'
-    }, {
-        'id': 2,
-        'name': 'Paper pack',
-        'supercategory': 'Paper pack'
-    }, {
-        'id': 3,
-        'name': 'Metal',
-        'supercategory': 'Metal'
-    }, {
-        'id': 4,
-        'name': 'Glass',
-        'supercategory': 'Glass'
-    }, {
-        'id': 5,
-        'name': 'Plastic',
-        'supercategory': 'Plastic'
-    }, {
-        'id': 6,
-        'name': 'Styrofoam',
-        'supercategory': 'Styrofoam'
-    }, {
-        'id': 7,
-        'name': 'Plastic bag',
-        'supercategory': 'Plastic bag'
-    }, {
-        'id': 8,
-        'name': 'Battery',
-        'supercategory': 'Battery'
-    }, {
-        'id': 9,
-        'name': 'Clothing',
-        'supercategory': 'Clothing'
-    }],
+    'categories': [],
     'annotations': []
 }
 

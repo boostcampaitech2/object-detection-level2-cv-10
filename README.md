@@ -27,12 +27,19 @@
 
 ## Model infomation
 
-1. [YOLOv5](/yolov5/README.MD)
+### [YOLOv5](/yolov5/)
+```
+optimizer: AdamW
+scheduler:
+epoch:
+loss:
+```
 
-2. [swin-t_Cascade_R-CNN](/mmdet_config/README.md)
+### [Swin-t FPN Cascade R-CNN](/mmdet_config/)
 
-2. [swin-t_HTC_R-CNN](/mmdet_config/README.md)
+### [Swin-t FPN Cascade R-CNN psuedo labeling](/mmdet_config/)
 
+### [Swin-s FPN HTC](/mmdet_config/)
 ## Ensemble
 ```
 python ensemble_inference.py ~
